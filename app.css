@@ -1,0 +1,21 @@
+#container {
+  /* background: yellow; */
+}
+
+.flex {
+  display: flex;
+  /* border: 1px solid green; */
+}
+.column {
+  flex-direction: column;
+  /* background: red; */
+  border-right: 2px solid white;
+}
+table {
+  
+}
+table td{
+  padding: 1rem 1.5rem;
+  background: #eee;
+  /* border: 1px solid aliceblue; */
+}

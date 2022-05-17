@@ -1,0 +1,27 @@
+{
+  "name": "sudoku-typescript",
+  "version": "1.0.0",
+  "description": "Sudoku algorithm in typescript",
+  "main": "app.ts",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkbharadwazkopalle/sudoku-typescript.git"
+  },
+  "keywords": [
+    "sudoku",
+    "typescript",
+    "alogrithms"
+  ],
+  "author": "V K Bharadwaz Kopalle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkbharadwazkopalle/sudoku-typescript/issues"
+  },
+  "homepage": "https://github.com/vkbharadwazkopalle/sudoku-typescript#readme",
+  "dependencies": {
+    "typescript": "^4.6.4"
+  }
+}
