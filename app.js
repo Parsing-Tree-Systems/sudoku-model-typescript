@@ -1,7 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildDataStructs = void 0;
+exports.buildGrid = exports.buildDataStructs = void 0;
 function buildDataStructs() {
+    const outer = [];
+    for (let i = 0; i < 9; i++) {
+        const inner = [];
+        for (let j = 1; j < 10; j++) {
+            if ((i + j) < 10) {
+                inner.push(i + j);
+            }
+            else {
+                console.log({ i, j });
+                console.table({ inner });
+                inner.push((j) - (j - 1));
+            }
+        }
+        outer.push(inner);
+    }
+}
+exports.buildDataStructs = buildDataStructs;
+function buildGrid() {
     const container = document.getElementById('container');
     for (let i = 0; i < 3; i++) {
         const row = document.createElement('div');
@@ -26,6 +44,6 @@ function buildDataStructs() {
         container.appendChild(row);
     }
 }
-exports.buildDataStructs = buildDataStructs;
+exports.buildGrid = buildGrid;
 buildDataStructs();
 // document.body.textContent = buildDataStructs().toString();

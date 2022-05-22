@@ -11,9 +11,30 @@ export interface Container {
 
 export function buildDataStructs() {
 
+  const outer = [];
+  for(let i=0;i<9;i++) {
+    const inner = [];
+    for(let j=1;j<10;j++) {
+      if((i+j) < 10) {
+        inner.push(i+j);
+      } else {
+        console.log({i, j});
+        console.table({ inner });
+        inner.push((j) - (j-1));
+      }
+      
+    }
+    outer.push(inner);
+  }
+
+  
+  
+}
+
+export function buildGrid() {
+
   const container = document.getElementById('container');
   
-
   for(let i=0;i<3;i++) {
     const row = document.createElement('div');
     row.setAttribute('class', 'flex');
