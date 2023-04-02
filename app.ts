@@ -1,67 +1,140 @@
-export interface Model {
-  x: number;
-  y: number;
-  value?: number;
-  id: string;
-}
+export class Sudoku {
 
-export interface Container {
-  inner: Model[];
-}
-
-export function buildDataStructs() {
-
-  const outer = [];
-  for(let i=0;i<9;i++) {
-    const inner = [];
-    for(let j=1;j<10;j++) {
-      if((i+j) < 10) {
-        inner.push(i+j);
-      } else {
-        console.log({i, j});
-        console.table({ inner });
-        inner.push((j) - (j-1));
+  private shiftPush(source: number[], shiftCount: number): number[] {
+  
+    const copy: number[] = JSON.parse(JSON.stringify(source));
+    
+    for(let i=0;i<shiftCount;i++) {
+  
+      let shift: number;
+      
+      if(Boolean(copy)) {
+        shift = copy.shift() ?? 0;
+        copy.push(shift);
       }
       
     }
-    outer.push(inner);
+  
+    return copy;
+  
   }
-
   
-  
-}
-
-export function buildGrid() {
-
-  const container = document.getElementById('container');
-  
-  for(let i=0;i<3;i++) {
-    const row = document.createElement('div');
-    row.setAttribute('class', 'flex');
-    for(let j=0;j<3;j++) {
-      const column = document.createElement('div');
-      column.setAttribute('class', 'column');
-      column.setAttribute('id', j.toString());
-      const table = document.createElement('table');
-      for(let a=1;a<4;a++) {
-        const tr = document.createElement('tr');
-        for(let b=1;b<4;b++) {
-          const td = document.createElement('td');
-          td.textContent = (a+b).toString();
-          tr.appendChild(td);
-        }
-        table.appendChild(tr);
-      }
-      column.appendChild(table);
-      row.appendChild(column);
+  private generator() {
+    
+    const arr = [1,2,3,4,5,6,7,8,9];
+    for (let i = 0; i < arr.length; i++) {
+      const r = i + Math.floor(Math.random() * arr.length - i);
+      const tmp = arr[i];
+      arr[i] = arr[r];
+      arr[r] = tmp
     }
-    container.appendChild(row);
+  
+    console.table(arr);
+  
+    return arr;
+  
+  }
+  
+  public buildDataStructs(index: number) {
+
+    let source: number[] = this.generator();
+
+    const array: number[][] = [];
+  
+    // array[0] = firstRow;
+    const inner = new Set<number>();
+  
+    for(let i=0;i<9;i++) {
+      switch(i/3) {
+        case 0: {
+          array.push(source);
+          break;
+        }
+        case 1: {
+          const copy = this.shiftPush(source, 1);
+          array[i] = (copy);
+          break;
+        }
+        case 2: {
+  
+          const copy = this.shiftPush(source, 2);
+          
+          array[i] = (copy);
+          
+        }
+      }
+  
+      const copy1 = this.shiftPush(source, 3);
+      const copy2 = this.shiftPush(copy1, 3);
+  
+      if(i === 1) {
+        array.push(copy2);
+      } else if(i === 2) {
+        array.push(copy1);
+      }
+  
+      const copy3 = this.shiftPush(source, 1);
+      const copy4 = this.shiftPush(copy3, 3);
+      const copy5 = this.shiftPush(copy4, 3);
+  
+      if(i === 4) {
+        array.push(copy5);
+      } else if(i === 5) {
+        array.push(copy4);
+      }
+  
+      const copy6 = this.shiftPush(source, 2);
+      const copy7 = this.shiftPush(copy6, 3);
+      const copy8 = this.shiftPush(copy7, 3);
+  
+      if(i === 7) {
+        array.push(copy8);
+      } else if(i === 8) {
+        array.push(copy7);
+      }
+  
+    }
+    
+    // console.table(array);
+    this.buildGrid(index, array);
+    
+  }
+  
+  private buildGrid(index: number, array: number[][]) {
+  
+    const container = document.querySelector('.flex');
+    const grid = document.createElement('div');
+    grid.setAttribute('class', 'grid');
+    grid.setAttribute('id', `grid-${index}`);
+    const heading = document.createElement('h2');
+    heading.innerText = `${index}`;
+    grid.appendChild(heading);
+    const table = document.createElement('table');
+    const tb = document.createElement('tbody');
+    table.appendChild(tb);
+  
+    array.forEach((row, r)=> {
+      const tr = document.createElement('tr');
+      row.forEach((col, c) => {
+        const td = document.createElement('td');
+        td.innerText = col.toString();
+        tr.appendChild(td);
+      });
+      tb?.appendChild(tr);
+    });
+  
+    grid?.appendChild(table);
+    container?.appendChild(grid);
+  
   }
 
-  
-  
 }
 
-buildDataStructs();
+// Usage
 
-// document.body.textContent = buildDataStructs().toString();
+for(let i=1;i<10001;i++) {
+
+  const sudoku = new Sudoku();
+  sudoku.buildDataStructs(i);
+
+}

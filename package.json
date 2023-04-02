@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/vkbharadwazkopalle/sudoku-typescript#readme",
   "dependencies": {
-    "typescript": "^4.6.4"
+    "typescript": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35"
   }
 }
