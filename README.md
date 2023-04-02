@@ -1,3 +1,5 @@
 # Rudimentary model generator for sudoku with typescript
-![image](https://user-images.githubusercontent.com/5936702/229343934-51afca0d-3aa0-4c8b-a2e5-d5f1849f5dd7.png)
+
+## [Demo](https://parsing-tree-systems.github.io/sudoku-model-typescript/) 
+![image](https://user-images.githubusercontent.com/5936702/229345060-500a915f-6c01-4c43-9065-de9923d1b103.png)
 
